@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Awesome Weather App</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+  <ion-grid *ngIf="weather">
+    <div class="icon"><img src="{{ weather.icon }}"></div>
+    <ion-row>
+      <ion-col width-50 offset-25>
+        <h1 class="temperature">{{ weather.temperature }}&deg;{{degree}}</h1>
+        <h2 class="location">{{ weather.location }}</h2>
+        <h3 class="description">{{ weather.description }}</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-100>
+        <ion-list>
+          <ion-item>
+            <strong>Pressure:&nbsp;</strong>{{ weather.pressure }}&nbsp;hPa
+          </ion-item>
+          <ion-item>
+            <strong>Humidity:&nbsp;</strong>{{ weather.humidity }}%
+          </ion-item>
+          <ion-item>
+            <strong>Wind:&nbsp;</strong>{{ weather.wind }}&nbsp;m/s
+          </ion-item>
+          <ion-item>
+            <strong>Cloudiness:&nbsp;</strong>{{ weather.clouds }}%
+          </ion-item>
+          <ion-item>
+            <strong>Visibility:&nbsp;</strong>{{ weather.visibility }}&nbsp;
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

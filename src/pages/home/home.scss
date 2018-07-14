@@ -1,0 +1,22 @@
+page-home {
+
+}
+
+.home {
+    text-align: center;
+}
+
+.temperature {
+  font-size: 600%;
+}
+
+ion-item strong, .location, .description, .temperature {
+  color: color($colors, light);
+  letter-spacing: 1px;
+}
+
+.icon img {
+  width: 90px;
+  height: 90px;
+  margin: -10px;
+}
