@@ -36,4 +36,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-grid *ngIf="weather==null">
+  <ion-row>
+    <ion-col width-50 offset-25>
+      <br>
+      <h1 class="oops">Uh oh!</h1>
+      <h3 class="error">Apparently we can't reach the servers.</h3>
+      <h3 class="error">Make sure you're connected to the internet and try again later.</h3>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>
