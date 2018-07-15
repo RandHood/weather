@@ -10,9 +10,9 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
   weather: any;
+  _weather: any;
   location: {
-    city: string,
-    country: string
+    city: string
   };
   unit: string;
   degree: string;
@@ -37,19 +37,19 @@ export class HomePage {
       this.degree = 'C';
 
       this.weatherProvider.getWeather(this.location.city, this.unit)
-        .subscribe(_weather => {
-          // let _weather = weather;
-          let iconCode = _weather.weather[0].icon;
+        .subscribe(weather => {
+          this._weather = weather;
+          let iconCode = this._weather.weather[0].icon;
           let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
           this.weather = {
-            location: _weather.name + ', ' + _weather.sys.country,
-            temperature: _weather.main.temp,
-            humidity: _weather.main.humidity,
-            pressure: _weather.main.pressure,
-            wind: _weather.wind.speed,
-            clouds: _weather.clouds.all,
-            visibility: _weather.visibility,
-            description: _weather.weather[0].description,
+            location: this._weather.name + ', ' + this._weather.sys.country,
+            temperature: this._weather.main.temp,
+            humidity: this._weather.main.humidity,
+            pressure: this._weather.main.pressure,
+            wind: this._weather.wind.speed,
+            clouds: this._weather.clouds.all,
+            visibility: this._weather.visibility,
+            description: this._weather.weather[0].description,
             icon: iconUrl
           };
           console.log(this.weather);
