@@ -20,25 +20,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+// import { HomePage } from '../home/home';
 var SettingsPage = /** @class */ (function () {
     function SettingsPage(navCtrl, navParams, storage) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.storage = storage;
-        this.storage.get('location').then(function (val) {
+        this.cities = ['Hong Kong', 'Singapore', 'Bangkok', 'London', 'Macau', 'Kuala Lumpur', 'Shenzhen', 'New York City', 'Antalya', 'Paris', 'Istanbul', 'Rome', 'Dubai', 'Guangzhou', 'Phuket', 'Mecca', 'Pattaya', 'Taipei City', 'Prague', 'Shanghai', 'Las Vegas', 'Miami', 'Barcelona', 'Moscow', 'Beijing', 'Los Angeles', 'Budapest', 'Vienna', 'Amsterdam', 'Sofia', 'Madrid', 'Orlando', 'Ho Chi Minh City', 'Lima', 'Berlin', 'Tokyo', 'Warsaw', 'Chennai', 'Cairo', 'Nairobi', 'Hangzhou', 'Milan', 'San Francisco', 'Buenos Aires', 'Venice', 'Mexico City', 'Dublin', 'Seoul', 'Mugla', 'Mumbai', 'Denpasar', 'Delhi', 'Toronto', 'Zhuhai', 'St Petersburg', 'Burgas', 'Sydney', 'Djerba', 'Munich', 'Johannesburg', 'Cancun', 'Edirne', 'Suzhou', 'Bucharest', 'Punta Cana', 'Agra', 'Jaipur', 'Brussels', 'Nice', 'Chiang Mai', 'Sharm el-Sheikh', 'Lisbon', 'East Province', 'Marrakech', 'Jakarta', 'Manama', 'Hanoi', 'Honolulu', 'Manila', 'Guilin', 'Auckland', 'Siem Reap', 'Sousse', 'Amman', 'Vancouver', 'Abu Dhabi', 'Kiev', 'Doha', 'Florence', 'Rio de Janeiro', 'Melbourne', 'Washington D.C', 'Riyadh', 'Christchurch', 'Frankfurt', 'Baku', 'Sao Paulo', 'Harare', 'Kolkata', 'Nanjing'];
+        this.cities = this.cities.sort();
+        this.storage.get('settings').then(function (val) {
             if (val != null) {
-                var location_1 = JSON.parse(val);
-                _this.city = location_1.city;
+                var settings = JSON.parse(val);
+                _this.city = settings.city;
+                _this.unit = settings.unit;
             }
             else {
                 _this.city = 'Cairo';
+                _this.unit = 'metric';
             }
         });
     }
@@ -46,14 +45,16 @@ var SettingsPage = /** @class */ (function () {
         console.log('ionViewDidLoad SettingsPage');
     };
     SettingsPage.prototype.saveForm = function () {
-        var location = {
-            city: this.city
+        var settings = {
+            city: this.city,
+            unit: this.unit
         };
-        this.storage.set('location', JSON.stringify(location));
+        this.storage.set('settings', JSON.stringify(settings));
+        // this.navCtrl.push(HomePage);
     };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-settings',template:/*ion-inline-start:"C:\Users\RandHood\Desktop\weather_1\src\pages\settings\settings.html"*/'<!--\n\n  Generated template for the SettingsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Settings</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="settings" padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col width-100>\n\n        <ion-list>\n\n          <form (ngSubmit)="saveForm()">\n\n            <ion-item>\n\n              <ion-label fixed>City</ion-label>\n\n              <ion-select [(ngModel)]="city" name="city">\n\n                <ion-option class="option" value="Cairo">Cairo</ion-option>\n\n                <ion-option value="London">London</ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n            <button ion-button type="submit" block>Save Chahnges</button>\n\n          </form>\n\n        </ion-list>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\RandHood\Desktop\weather_1\src\pages\settings\settings.html"*/,
+            selector: 'page-settings',template:/*ion-inline-start:"C:\Users\RandHood\Desktop\weather_1\src\pages\settings\settings.html"*/'<!--\n\n  Generated template for the SettingsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Settings</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="settings" padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col width-100>\n\n        <ion-list>\n\n          <form (ngSubmit)="saveForm()">\n\n            <ion-item>\n\n              <ion-label fixed>City</ion-label>\n\n              <ion-select [(ngModel)]="city" name="city">\n\n                <ion-option *ngFor="let city of cities" value="{{ city }}">{{ city }}</ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n              <ion-label fixed>Unit</ion-label>\n\n              <ion-select [(ngModel)]="unit" name="unit">\n\n                <ion-option value="metric">Metric</ion-option>\n\n                <ion-option value="imperial">Imperial</ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n            <button ion-button type="submit" block>Save Chahnges</button>\n\n          </form>\n\n        </ion-list>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\RandHood\Desktop\weather_1\src\pages\settings\settings.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
@@ -169,8 +170,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = /** @class */ (function () {
-    // apiKey = '49f5f1b2aa04f7d7e6436cbe2ed83bfc';
-    // url = 'http://api.openweathermap.org/data/2.5/weather?q=';
     function HomePage(navCtrl, weatherProvider, http, storage) {
         this.navCtrl = navCtrl;
         this.weatherProvider = weatherProvider;
@@ -179,25 +178,30 @@ var HomePage = /** @class */ (function () {
     }
     HomePage.prototype.ionViewWillEnter = function () {
         var _this = this;
-        this.storage.get('location').then(function (val) {
+        this.storage.get('settings').then(function (val) {
             if (val != null) {
-                _this.location = JSON.parse(val);
+                _this.settings = JSON.parse(val);
             }
             else {
-                _this.location = {
-                    city: 'Cairo'
+                _this.settings = {
+                    city: 'Cairo',
+                    unit: 'metric'
                 };
             }
-            _this.unit = 'metric';
-            _this.degree = 'C';
-            _this.weatherProvider.getWeather(_this.location.city, _this.unit)
+            if (_this.settings.unit === 'metric') {
+                _this.degree = 'C';
+            }
+            else {
+                _this.degree = 'F';
+            }
+            _this.weatherProvider.getWeather(_this.settings.city, _this.settings.unit)
                 .subscribe(function (weather) {
                 _this._weather = weather;
                 var iconCode = _this._weather.weather[0].icon;
                 var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
                 _this.weather = {
                     location: _this._weather.name + ', ' + _this._weather.sys.country,
-                    temperature: _this._weather.main.temp,
+                    temperature: Math.round(_this._weather.main.temp),
                     humidity: _this._weather.main.humidity,
                     pressure: _this._weather.main.pressure,
                     wind: _this._weather.wind.speed,
@@ -209,14 +213,10 @@ var HomePage = /** @class */ (function () {
                 console.log(_this.weather);
             });
         });
-        // return this.http.get(this.url + '&APPID=' + this.apiKey)
-        // .subscribe(weather => {
-        //   console.log(weather);
-        // });
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\RandHood\Desktop\weather_1\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Awesome Weather App</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding class="home">\n\n  <ion-grid *ngIf="weather">\n\n    <div class="icon"><img src="{{ weather.icon }}"></div>\n\n    <ion-row>\n\n      <ion-col width-50 offset-25>\n\n        <h1 class="temperature">{{ weather.temperature }}&deg;{{degree}}</h1>\n\n        <h2 class="location">{{ weather.location }}</h2>\n\n        <h3 class="description">{{ weather.description }}</h3>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row>\n\n      <ion-col width-100>\n\n        <ion-list>\n\n          <ion-item>\n\n            <strong>Pressure:&nbsp;</strong>{{ weather.pressure }}&nbsp;hPa\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Humidity:&nbsp;</strong>{{ weather.humidity }}%\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Wind:&nbsp;</strong>{{ weather.wind }}&nbsp;m/s\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Cloudiness:&nbsp;</strong>{{ weather.clouds }}%\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Visibility:&nbsp;</strong>{{ weather.visibility }}&nbsp;\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n  <ion-grid *ngIf="weather==null">\n\n  <ion-row>\n\n    <ion-col width-50 offset-25>\n\n      <br>\n\n      <h1 class="oops">Uh oh!</h1>\n\n      <h3 class="error">Apparently we can\'t reach the servers.</h3>\n\n      <h3 class="error">Make sure you\'re connected to the internet and try again later.</h3>\n\n    </ion-col>\n\n  </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\RandHood\Desktop\weather_1\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\RandHood\Desktop\weather_1\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Awesome Weather App</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding class="home">\n\n  <ion-grid *ngIf="weather">\n\n    <div class="icon"><img src="{{ weather.icon }}"></div>\n\n    <ion-row>\n\n      <ion-col width-50 offset-25>\n\n        <h1 class="temperature">{{ weather.temperature }}&deg;{{ degree }}</h1>\n\n        <h2 class="location">{{ weather.location }}</h2>\n\n        <h3 class="description">{{ weather.description }}</h3>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row>\n\n      <ion-col width-100>\n\n        <ion-list>\n\n          <ion-item>\n\n            <strong>Pressure:&nbsp;</strong>{{ weather.pressure }}&nbsp;hPa\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Humidity:&nbsp;</strong>{{ weather.humidity }}%\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Wind:&nbsp;</strong>{{ weather.wind }}&nbsp;m/s\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Cloudiness:&nbsp;</strong>{{ weather.clouds }}%\n\n          </ion-item>\n\n          <ion-item>\n\n            <strong>Visibility:&nbsp;</strong>{{ weather.visibility }}&nbsp;\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n  <ion-grid *ngIf="weather==null">\n\n  <ion-row>\n\n    <ion-col width-50 offset-25>\n\n      <br>\n\n      <h1 class="oops">Uh oh!</h1>\n\n      <h3 class="error">Apparently we can\'t reach the servers.</h3>\n\n      <h3 class="error">Make sure you\'re connected to the internet and try again later.</h3>\n\n    </ion-col>\n\n  </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\RandHood\Desktop\weather_1\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_weather_weather__["a" /* WeatherProvider */],
             __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
@@ -258,9 +258,6 @@ var WeatherProvider = /** @class */ (function () {
     }
     WeatherProvider.prototype.getWeather = function (city, unit) {
         return this.http.get(this.url + city + '&APPID=' + this.apiKey + '&units=' + unit);
-        // return this.http.get(this.url + '&APPID=' + this.apiKey);
-        // return this.http.get(this.url + city + '&APPID=' + this.apiKey)
-        //   .map(res => res.json());
     };
     WeatherProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),

@@ -22,8 +22,14 @@
             <ion-item>
               <ion-label fixed>City</ion-label>
               <ion-select [(ngModel)]="city" name="city">
-                <ion-option class="option" value="Cairo">Cairo</ion-option>
-                <ion-option value="London">London</ion-option>
+                <ion-option *ngFor="let city of cities" value="{{ city }}">{{ city }}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label fixed>Unit</ion-label>
+              <ion-select [(ngModel)]="unit" name="unit">
+                <ion-option value="metric">Metric</ion-option>
+                <ion-option value="imperial">Imperial</ion-option>
               </ion-select>
             </ion-item>
             <button ion-button type="submit" block>Save Chahnges</button>

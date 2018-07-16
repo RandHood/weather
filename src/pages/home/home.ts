@@ -11,13 +11,11 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   weather: any;
   _weather: any;
-  location: {
+  settings: {
     city: string
+    unit: string;
   };
-  unit: string;
   degree: string;
-  // apiKey = '49f5f1b2aa04f7d7e6436cbe2ed83bfc';
-  // url = 'http://api.openweathermap.org/data/2.5/weather?q=';
 
   constructor(public navCtrl: NavController, private weatherProvider: WeatherProvider,
               private http: HttpClient, private storage: Storage) {
@@ -25,25 +23,29 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.storage.get('location').then((val) => {
+    this.storage.get('settings').then((val) => {
       if (val != null) {
-        this.location = JSON.parse(val);
+        this.settings = JSON.parse(val);
       } else {
-        this.location = {
-          city: 'Cairo'
+        this.settings = {
+          city: 'Cairo',
+          unit: 'metric'
         };
       }
-      this.unit = 'metric';
-      this.degree = 'C';
-
-      this.weatherProvider.getWeather(this.location.city, this.unit)
+      if (this.settings.unit === 'metric') {
+        this.degree = 'C';
+      } else {
+        this.degree = 'F';
+      }
+        
+      this.weatherProvider.getWeather(this.settings.city, this.settings.unit)
         .subscribe(weather => {
           this._weather = weather;
           let iconCode = this._weather.weather[0].icon;
           let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
           this.weather = {
             location: this._weather.name + ', ' + this._weather.sys.country,
-            temperature: this._weather.main.temp,
+            temperature: Math.round(this._weather.main.temp),
             humidity: this._weather.main.humidity,
             pressure: this._weather.main.pressure,
             wind: this._weather.wind.speed,
@@ -54,14 +56,6 @@ export class HomePage {
           };
           console.log(this.weather);
         });
-
     });
-
-
-    // return this.http.get(this.url + '&APPID=' + this.apiKey)
-    // .subscribe(weather => {
-    //   console.log(weather);
-    // });
   }
-
 }
